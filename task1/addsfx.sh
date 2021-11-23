@@ -19,7 +19,7 @@ do
         elif [[ "$arg" == "-d" ]]; then
             fl_d=1
         else
-            echo "incorrect option" >$2
+            echo "incorrect option" >&2
     	    exit 2 
         fi   
     fi
@@ -45,7 +45,7 @@ do
 
             #echo "$HOME/test/$arg"
             if [[ ! -e "$arg" ]]; then
-                echo "file $arg does not exist" >$2
+                echo "file $arg does not exist" >&2
                 exit 2
             fi
             
@@ -58,7 +58,7 @@ do
 
             if [[ -z "$fl_d" ]]; then
                 if ! mv -- "$arg" "$name$sfx$ext"; then
-                    echo "can't rename file $arg" >$2
+                    echo "can't rename file $arg" >&2
                     ex=1
                 fi
             fi
@@ -72,12 +72,12 @@ do
 done
 
 if [[ -z "$sfx" ]]; then
-    echo "incorrect input. no suffix" 
+    echo "incorrect input. no suffix" >&2
     exit 2
 fi
 
 if [[ -z "$fl_file" ]]; then
-    echo "incorrect input. no files" 
+    echo "incorrect input. no files" >&2
     exit 2
 fi
 

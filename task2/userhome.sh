@@ -27,14 +27,14 @@ if [[ -z "$user" ]]; then
 fi
 
 if [[ ! -e "$file" ]]; then
-    echo "file does not exist" >$2
+    echo "file does not exist" >&2
     exit 2
 fi
 
 str="$(grep $user $file)"
 
 if [[ "$str" == "" ]]; then
-    echo "user does not exist" >$2
+    echo "user does not exist" >&2
     exit 1
 fi
 
