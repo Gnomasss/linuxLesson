@@ -19,7 +19,7 @@ do
 done
 
 if [[ -z "$file" ]]; then
-    file="/etc/passwd"
+    file="/etc/passwd" 
 fi
 
 if [[ -z "$user" ]]; then
@@ -31,12 +31,17 @@ if [[ ! -e "$file" ]]; then
     exit 2
 fi
 
-str="$(grep $user $file)"
+numName="$(cut -d ':' -f 1 $file | grep -w -n -- $user)"
 
-if [[ "$str" == "" ]]; then
+if [[ "$numName" == "" ]]; then
     echo "user does not exist" >&2
     exit 1
 fi
+
+num="${numName%:*}"
+str=`sed "${num}q;d" $file`
+
+
 
 echo $str | cut -d ':' -f 6
 
