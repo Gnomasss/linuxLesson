@@ -45,4 +45,5 @@ str=`sed "${num}q;d" $file`
 
 echo $str | cut -d ':' -f 6
 
+exit 0
 
