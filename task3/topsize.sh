@@ -2,9 +2,9 @@
 
 unset fl_h
 unset N
-unset minsize
+minsize=0
 unset fl_opt
-
+unset fl_dir
 unset dir
 
 while test $# -gt 0
@@ -29,22 +29,17 @@ do
         else
             echo "incorrect option $arg" >&2
     	    exit 2 
-        fi   
-    fi
-done
+        fi
 
-unset fl_dir
 
-for arg in "$@"
-do
-    if [[ "${arg:0:1}" != "-" ||  "$fl_opt" ]]
-    then
-        fl_dir=1
+    else
+
+
         if [[ ! -e "$arg" ]]; then
             echo "dir does not exist" >&2
             exit 2
         fi
-        if [[ -n "$N"]]
+        if [[ -n "$N" ]]
         then
             if [[ -n "$fl_h" ]]; then
                 find $arg -depth -size +$minsize  -type f -exec du -bh {} \; | sort -r -h | head -$N 
@@ -60,10 +55,14 @@ do
             fi
 
         fi
+        shift
 
     fi
 
 done
+
+
+
 
 if [[ -z "$fl_dir" ]]; then
     echo "specify the direcory" >&2
