@@ -47,16 +47,16 @@ do
         if [[ -n "$N"]]
         then
             if [[ -n "$fl_h" ]]; then
-                find $arg -depth -size +$minsize  -type f -exec ls -s -h -1 {} \; | sort -r -h | head -$N 
+                find $arg -depth -size +$minsize  -type f -exec du -bh {} \; | sort -r -h | head -$N 
             else
-                find $arg -depth -size +$minsize  -type f -exec ls -s -1 {} \; | sort -r | head -$N
+                find $arg -depth -size +$minsize  -type f -exec du -b {} \; | sort -r -n | head -$N
             fi
 
         else
             if [[ -n "$fl_h" ]]; then
-                find $arg -depth -size +$minsize  -type f -exec ls -s -h -1 {} \; | sort -r -h 
+                find $arg -depth -size +$minsize  -type f -exec du -bh {} \; | sort -r -h 
             else
-                find $arg -depth -size +$minsize  -type f -exec ls -s -1 {} \; | sort -r 
+                find $arg -depth -size +$minsize  -type f -exec du -b {} \; | sort -r -n
             fi
 
         fi
